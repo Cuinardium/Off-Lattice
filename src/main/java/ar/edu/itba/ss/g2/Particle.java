@@ -9,11 +9,15 @@ public class Particle {
 
     private Double direction;
 
-    public Particle(Long id, Double x, Double y, Double radius) {
+    public Particle(Long id, Double x, Double y, Double direction) {
         this.x = x;
         this.y = y;
-        this.direction = radius;
+        this.direction = direction;
         this.id = id;
+    }
+
+    public Particle(Particle that) {
+        this(that.id, that.x, that.y, that.direction);
     }
 
     public Double getX() {
