@@ -17,10 +17,11 @@ public class ArgParser {
                     new Option("N", "number", true, "Amount of particles to be generated"),
                     new Option("L", "length", true, "Length of the area to be analyzed"),
 
-                    // For Cell Index Method
+                    // For simulation
                     new Option("v", "velocity", true, "Velocity of the particles"),
                     new Option("n", "noise", true, "Noise in the velocity of the particles"),
-                    new Option("rc", "interaction-radius", true, "Interaction radius"));
+                    new Option("rc", "interaction-radius", true, "Interaction radius"),
+                    new Option("t", "time", true, "Amount of steps (t) to simulate"));
 
     private final String[] args;
     private final Options options;
@@ -63,6 +64,11 @@ public class ArgParser {
                 return null;
             }
 
+            if (N <= 0) {
+                System.err.println("Number of particles must be greater than 0");
+                return null;
+            }
+
             builder.N(N);
         } else {
             System.err.println("Number of particles is required");
@@ -75,6 +81,11 @@ public class ArgParser {
                 L = Integer.parseInt(cmd.getOptionValue("L"));
             } catch (NumberFormatException e) {
                 System.err.println("Invalid length: " + cmd.getOptionValue("L"));
+                return null;
+            }
+
+            if (L <= 0) {
+                System.err.println("Length must be greater than 0");
                 return null;
             }
 
@@ -108,6 +119,11 @@ public class ArgParser {
                 return null;
             }
 
+            if (v <= 0) {
+                System.err.println("Velocity must be greater than 0");
+                return null;
+            }
+
             builder.v(v);
         } else {
             System.err.println("Velocity is required");
@@ -120,6 +136,11 @@ public class ArgParser {
                 noise = Double.parseDouble(cmd.getOptionValue("n"));
             } catch (NumberFormatException e) {
                 System.err.println("Invalid noise: " + cmd.getOptionValue("n"));
+                return null;
+            }
+
+            if (noise < 0) {
+                System.err.println("Noise must be greater than or equal to 0");
                 return null;
             }
 
@@ -138,6 +159,11 @@ public class ArgParser {
                 return null;
             }
 
+            if (rc <= 0) {
+                System.err.println("Cutoff radius must be greater than 0");
+                return null;
+            }
+
             builder.rc(rc);
         } else {
             System.err.println("Cutoff radius is required");
@@ -148,6 +174,26 @@ public class ArgParser {
             builder.outputDirectory(cmd.getOptionValue("out"));
         } else {
             System.err.println("Output directory is required");
+            return null;
+        }
+
+        if (cmd.hasOption("t")) {
+            long t;
+            try {
+                t = Long.parseLong(cmd.getOptionValue("t"));
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid time: " + cmd.getOptionValue("t"));
+                return null;
+            }
+
+            if (t <= 0) {
+                System.err.println("Max Time must be greater than 0");
+                return null;
+            }
+
+            builder.t(t);
+        } else {
+            System.err.println("Max Time is required");
             return null;
         }
 

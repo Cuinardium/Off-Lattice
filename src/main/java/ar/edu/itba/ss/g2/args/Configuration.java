@@ -15,6 +15,8 @@ public class Configuration {
     private final double noise;
     private final double rc;
 
+    private final long t;
+
     private Configuration(Builder builder) {
         this.outputDirectory = builder.outputDirectory;
         this.seed = builder.seed;
@@ -24,6 +26,7 @@ public class Configuration {
         this.noise = builder.noise;
         this.L = builder.L;
         this.rc = builder.rc;
+        this.t = builder.t;
     }
 
     public String getOutputDirectory() {
@@ -54,6 +57,10 @@ public class Configuration {
         return rc;
     }
 
+    public long getT() {
+        return t;
+    }
+
     @Override
     public String toString() {
         return "Configuration{" +
@@ -64,6 +71,7 @@ public class Configuration {
                 ", v=" + v +
                 ", noise=" + noise +
                 ", rc=" + rc +
+                ", t=" + t +
                 '}';
     }
 
@@ -80,6 +88,8 @@ public class Configuration {
         private double noise;
 
         private double rc;
+
+        private long t;
 
         public Builder() {}
 
@@ -115,6 +125,11 @@ public class Configuration {
 
         public Builder rc(double rc) {
             this.rc = rc;
+            return this;
+        }
+
+        public Builder t(long t) {
+            this.t = t;
             return this;
         }
 
