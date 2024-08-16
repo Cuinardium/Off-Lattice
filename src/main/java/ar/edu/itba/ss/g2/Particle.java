@@ -1,0 +1,83 @@
+package ar.edu.itba.ss.g2;
+
+public class Particle {
+
+    private final Long id;
+
+    private Double x;
+    private Double y;
+
+    private Double direction;
+
+    public Particle(Long id, Double x, Double y, Double radius) {
+        this.x = x;
+        this.y = y;
+        this.direction = radius;
+        this.id = id;
+    }
+
+    public Double getX() {
+        return x;
+    }
+
+    public Double getY() {
+        return y;
+    }
+
+    public Double getDirection() {
+        return direction;
+    }
+
+    public void setX(Double x) {
+        this.x = x;
+    }
+
+    public void setY(Double y) {
+        this.y = y;
+    }
+
+    public void setDirection(Double direction) {
+        this.direction = direction;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Double distanceTo(Particle other) {
+        double dx = this.x - other.x;
+        double dy = this.y - other.y;
+        return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+    }
+
+    public Double toroidalDistanceTo(Particle other, Long L) {
+        double dx = Math.abs(this.x - other.x);
+        double dy = Math.abs(this.y - other.y);
+
+        // Toroide, me quedo con la distancia más corta
+        dx = Math.min(dx, L - dx);
+        dy = Math.min(dy, L - dy);
+
+        return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+    }
+
+
+    @Override
+    public String toString() {
+        return "{" + "id=" + id + ", x=" + x + ", y=" + y + ", r=" + direction + '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Particle) {
+            Particle p = (Particle) obj;
+            return p.id.equals(this.id);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+}
