@@ -64,7 +64,8 @@ public class Particle {
 
     @Override
     public String toString() {
-        return "{" + "id=" + id + ", x=" + x + ", y=" + y + ", r=" + direction + '}';
+        double radians = direction / Math.PI;
+        return "{" + "id=" + id + ", x=" + x + ", y=" + y + ", θ=" + radians + "π}";
     }
 
     @Override
