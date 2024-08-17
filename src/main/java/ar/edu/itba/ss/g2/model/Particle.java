@@ -1,4 +1,4 @@
-package ar.edu.itba.ss.g2;
+package ar.edu.itba.ss.g2.model;
 
 public class Particle {
 

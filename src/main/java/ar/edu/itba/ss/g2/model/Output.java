@@ -1,7 +1,5 @@
 package ar.edu.itba.ss.g2.model;
 
-import ar.edu.itba.ss.g2.Particle;
-
 import java.util.List;
 import java.util.Set;
 

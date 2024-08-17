@@ -1,4 +1,6 @@
-package ar.edu.itba.ss.g2;
+package ar.edu.itba.ss.g2.simulation;
+
+import ar.edu.itba.ss.g2.model.Particle;
 
 import java.util.HashSet;
 import java.util.Set;

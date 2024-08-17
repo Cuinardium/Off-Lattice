@@ -1,4 +1,4 @@
-package ar.edu.itba.ss.g2.args;
+package ar.edu.itba.ss.g2.config;
 
 import org.apache.commons.cli.*;
 

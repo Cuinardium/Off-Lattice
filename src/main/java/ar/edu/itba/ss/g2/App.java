@@ -1,8 +1,10 @@
 package ar.edu.itba.ss.g2;
 
-import ar.edu.itba.ss.g2.args.ArgParser;
-import ar.edu.itba.ss.g2.args.Configuration;
+import ar.edu.itba.ss.g2.config.ArgParser;
+import ar.edu.itba.ss.g2.config.Configuration;
 import ar.edu.itba.ss.g2.model.Output;
+import ar.edu.itba.ss.g2.model.Particle;
+import ar.edu.itba.ss.g2.simulation.ParticleGenerator;
 import ar.edu.itba.ss.g2.simulation.Simulation;
 import ar.edu.itba.ss.g2.utils.FileUtil;
 

@@ -1,7 +1,7 @@
 package ar.edu.itba.ss.g2.utils;
 
 import ar.edu.itba.ss.g2.model.Output;
-import ar.edu.itba.ss.g2.Particle;
+import ar.edu.itba.ss.g2.model.Particle;
 
 import java.io.File;
 import java.io.FileWriter;

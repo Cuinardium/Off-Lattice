@@ -1,7 +1,6 @@
 package ar.edu.itba.ss.g2.simulation;
 
-import ar.edu.itba.ss.g2.Particle;
-import ar.edu.itba.ss.g2.BoardState;
+import ar.edu.itba.ss.g2.model.Particle;
 
 import java.util.ArrayList;
 import java.util.List;
