@@ -54,7 +54,7 @@ public class Particle {
         return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
     }
 
-    public Double toroidalDistanceTo(Particle other, Long L) {
+    public Double toroidalDistanceTo(Particle other, int L) {
         double dx = Math.abs(this.x - other.x);
         double dy = Math.abs(this.y - other.y);
 
