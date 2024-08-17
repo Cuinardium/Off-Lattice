@@ -9,11 +9,18 @@ import java.util.stream.Collectors;
 public class BoardState {
     private final List<List<Cell>> board;
     private final Set<Particle> particles;
+
     private final int L;
+
+    private final double v;
+    private final double noise;
     private final double rc; 
 
-    public BoardState(int L, double rc, Set<Particle> particles) {
+    public BoardState(int L, double v, double noise, double rc, Set<Particle> particles) {
         this.L = L;
+
+        this.v = v;
+        this.noise = noise;
         this.rc = rc;
 
         if(L <= 0) {
