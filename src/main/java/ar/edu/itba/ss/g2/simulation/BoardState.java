@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class BoardState {
-    private final List<List<Cell>> board;
+    private final List<List<Set<Particle>>> board;
     private final Set<Particle> particles;
 
     private final int L;
@@ -38,7 +38,7 @@ public class BoardState {
         for (int i = 0; i < M + 1; i++) {
             board.add(new ArrayList<>( M + 1));
             for (int j = 0; j < M + 1; j++) {
-                board.get(i).add(new Cell());
+                board.get(i).add(new HashSet<>());
             }
         }
 
@@ -48,11 +48,11 @@ public class BoardState {
             this.particles.add(p);
             int x = (int) ((p.getX() * M) / L);
             int y = (int) ((p.getY() * M) / L);
-            board.get(x).get(y).addParticle(p);
+            board.get(x).get(y).add(p);
 
             // Si y = 0, agrego la particula a la columna
             if (y == 0) {
-                board.get(x).get(M).addParticle(p);
+                board.get(x).get(M).add(p);
             }
         }
 
@@ -60,11 +60,11 @@ public class BoardState {
         board.set(M + 1, board.get(0));
     }
 
-    private void checkAdjacent(List<List<Cell>> board, int x, int y, Particle p1, Map<Particle, Set<Particle>> neighbours) {
+    private void checkAdjacent(List<List<Set<Particle>>> board, int x, int y, Particle p1, Map<Particle, Set<Particle>> neighbours) {
         if(x < 0 || y < 0 || x >= board.size() || y >= board.get(0).size()) {
             return;
         }
-        Set<Particle> adjacentCellParticles = board.get(x).get(y).getParticles();
+        Set<Particle> adjacentCellParticles = board.get(x).get(y);
         for(Particle p2: adjacentCellParticles) {
             if(p1.toroidalDistanceTo(p2, L) < rc) {
                 neighbours.get(p1).add(p2);
@@ -85,7 +85,7 @@ public class BoardState {
                 // D E F
                 // G H I
                 // estoy parado en E.
-                Set<Particle> currentCellParticles = board.get(x).get(y).getParticles();
+                Set<Particle> currentCellParticles = board.get(x).get(y);
                 for (Particle p1 : currentCellParticles) {
                     // reviso E
                     checkAdjacent(board, x, y, p1, neighbours);
