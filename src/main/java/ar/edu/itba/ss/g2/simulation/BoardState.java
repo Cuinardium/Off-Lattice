@@ -57,7 +57,7 @@ public class BoardState {
         }
 
         // Copio la primera fila en la ultima
-        board.set(M + 1, board.get(0));
+        board.set(M, board.get(0));
     }
 
     private void checkAdjacent(List<List<Set<Particle>>> board, int x, int y, Particle p1, Map<Particle, Set<Particle>> neighbours) {
