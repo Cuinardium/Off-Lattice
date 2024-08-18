@@ -14,13 +14,17 @@ public class BoardState {
     private final double v;
     private final double noise;
     private final double rc; 
+    
+    private final Random random;
 
-    public BoardState(int L, double v, double noise, double rc, Set<Particle> particles) {
+    public BoardState(int L, double v, double noise, double rc, Set<Particle> particles, int seed) {
         this.L = L;
 
         this.v = v;
         this.noise = noise;
         this.rc = rc;
+
+        this.random = new Random(seed);
 
         if(L <= 0) {
             throw new IllegalArgumentException("L should be > 0");

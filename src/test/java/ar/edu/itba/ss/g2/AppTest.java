@@ -182,7 +182,7 @@ public class AppTest {
     public void test()
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 
-        BoardState boardState = new BoardState(L, 0, 0, RC, PARTICLES);
+        BoardState boardState = new BoardState(L, 0, 0, RC, PARTICLES, 0);
 
         // need to access getNeighbours method, but it is private
         // so we need to use reflection to access it

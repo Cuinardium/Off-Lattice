@@ -14,9 +14,10 @@ public class Simulation {
 
     private final long t;
 
-    public Simulation(Set<Particle> particles, int L, double v, double noise, double rc, long t) {
+    public Simulation(
+            Set<Particle> particles, int L, double v, double noise, double rc, long t, int seed) {
 
-        this.boardState = new BoardState(L, v, noise, rc, particles);
+        this.boardState = new BoardState(L, v, noise, rc, particles, seed);
 
         this.t = t;
 
@@ -36,5 +37,4 @@ public class Simulation {
     public List<Set<Particle>> getSnapshots() {
         return snapshots;
     }
-
 }

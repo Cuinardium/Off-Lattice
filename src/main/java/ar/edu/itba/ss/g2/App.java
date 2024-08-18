@@ -34,7 +34,7 @@ public class App {
         double rc = configuration.getRc();
         long t = configuration.getT();
 
-        Simulation simulation = new Simulation(Set.copyOf(particles), L, v, noise, rc, t);
+        Simulation simulation = new Simulation(Set.copyOf(particles), L, v, noise, rc, t, seed);
 
         simulation.run();
 
