@@ -10,6 +10,7 @@ public class BoardState {
     private final Set<Particle> particles;
 
     private final int L;
+    private final int M;
 
     private final double v;
     private final double noise;
@@ -34,6 +35,8 @@ public class BoardState {
         if(M <= 0) {
             M = 1;
         }
+
+        this.M = M;
 
         // M + 1 filas, para duplicar la ultima en la primera
         board = new ArrayList<>(M+1);
@@ -111,10 +114,83 @@ public class BoardState {
     }
 
     public void updateBoardState() {
-        throw new IllegalStateException("Uninplemented");
+        Map<Particle, Set<Particle>> neighbours = getNeighbours();
+
+        for (Particle p : particles) {
+
+            double x = p.getX();
+            double y = p.getY();
+
+            updateParticle(p, neighbours.get(p));
+
+            // Si se fue de la celda, la saco y la agrego a la nueva
+            int xOld = (int) ((x * M) / L);
+            int yOld = (int) ((y * M) / L);
+
+            int xNew = (int) ((p.getX() * M) / L);
+            int yNew = (int) ((p.getY() * M) / L);
+
+            if (xOld != xNew || yOld != yNew) {
+                board.get(xOld).get(yOld).remove(p);
+                board.get(xNew).get(yNew).add(p);
+            }
+        }
     }
 
     public Set<Particle> getParticles() {
         return this.particles.stream().map(Particle::new).collect(Collectors.toSet());
+    }
+
+
+    // TODO: A lo mejor mover a la clase particle?
+    private void updateParticle(Particle p, Set<Particle> neighbours) {
+
+        double x = p.getX();
+        double y = p.getY();
+        double direction = p.getDirection();
+
+        double dx = v * Math.cos(direction);
+        double dy = v * Math.sin(direction);
+
+
+        double sinSum = Math.sin(direction);
+        double cosSum = Math.cos(direction);
+
+        for (Particle particle : neighbours) {
+            sinSum += Math.sin(particle.getDirection());
+            cosSum += Math.cos(particle.getDirection());
+        }
+        
+        double sinAvg = sinSum / (neighbours.size() + 1);
+        double cosAvg = cosSum / (neighbours.size() + 1);
+
+        // TODO: Porque son 2 parametros?
+        // En clase dice atan2(sinAvg / cosAvg)
+        double directionAvg = Math.atan2(sinAvg, cosAvg);
+
+        // directionNoise : [-noise/2, noise/2]
+        double directionNoise = (random.nextDouble() - 0.5) * noise;
+
+        double newX = (x + dx) % L;
+        if (newX < 0) {
+            newX += L;
+        }
+
+        double newY = (y + dy) % L;
+        if (newY < 0) {
+            newY += L;
+        }
+
+        // TODO: Creo que no es necesario hacer el modulo porque
+        // Cos y Sin son periodicas
+        double newDirection = (directionAvg + directionNoise) % (2 * Math.PI);
+        if (newDirection < 0) {
+            newDirection += 2 * Math.PI;
+        }
+
+        p.setX(newX);
+        p.setY(newY);
+        p.setDirection((directionAvg + directionNoise) % (2 * Math.PI));
+
     }
 }
