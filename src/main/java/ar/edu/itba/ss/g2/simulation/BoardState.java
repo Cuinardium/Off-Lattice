@@ -35,12 +35,20 @@ public class BoardState {
         board = new ArrayList<>(M+1);
 
         // lleno con celdas
-        for (int i = 0; i < M + 1; i++) {
+        for (int i = 0; i < M; i++) {
             board.add(new ArrayList<>( M + 1));
-            for (int j = 0; j < M + 1; j++) {
+            for (int j = 0; j < M; j++) {
                 board.get(i).add(new HashSet<>());
             }
+
+            // Agrego la misma celda de la columna 0
+            // en la columna M
+            board.get(i).add(board.get(i).get(0));
         }
+
+        // Agrego la misma fila de la fila 0
+        // en la fila M
+        board.add(board.get(0));
 
         this.particles = new HashSet<>();
 
@@ -49,15 +57,7 @@ public class BoardState {
             int x = (int) ((p.getX() * M) / L);
             int y = (int) ((p.getY() * M) / L);
             board.get(x).get(y).add(p);
-
-            // Si y = 0, agrego la particula a la columna
-            if (y == 0) {
-                board.get(x).get(M).add(p);
-            }
         }
-
-        // Copio la primera fila en la ultima
-        board.set(M, board.get(0));
     }
 
     private void checkAdjacent(List<List<Set<Particle>>> board, int x, int y, Particle p1, Map<Particle, Set<Particle>> neighbours) {
