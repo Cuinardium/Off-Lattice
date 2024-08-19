@@ -190,7 +190,6 @@ public class BoardState {
 
         p.setX(newX);
         p.setY(newY);
-        p.setDirection((directionAvg + directionNoise) % (2 * Math.PI));
-
+        p.setDirection(newDirection);
     }
 }
