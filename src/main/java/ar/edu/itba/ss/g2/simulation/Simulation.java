@@ -12,10 +12,10 @@ public class Simulation {
 
     private final BoardState boardState;
 
-    private final long t;
+    private final int t;
 
     public Simulation(
-            Set<Particle> particles, int L, double v, double noise, double rc, long t, int seed) {
+            Set<Particle> particles, int L, double v, double noise, double rc, int t, int seed) {
 
         this.boardState = new BoardState(L, v, noise, rc, particles, seed);
 

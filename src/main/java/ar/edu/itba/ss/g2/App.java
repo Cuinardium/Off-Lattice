@@ -32,7 +32,7 @@ public class App {
         double v = configuration.getV();
         double noise = configuration.getNoise();
         double rc = configuration.getRc();
-        long t = configuration.getT();
+        int t = configuration.getT();
 
         Simulation simulation = new Simulation(Set.copyOf(particles), L, v, noise, rc, t, seed);
 

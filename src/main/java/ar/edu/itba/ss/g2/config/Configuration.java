@@ -15,7 +15,7 @@ public class Configuration {
     private final double noise;
     private final double rc;
 
-    private final long t;
+    private final int t;
 
     private Configuration(Builder builder) {
         this.outputDirectory = builder.outputDirectory;
@@ -57,7 +57,7 @@ public class Configuration {
         return rc;
     }
 
-    public long getT() {
+    public int getT() {
         return t;
     }
 
@@ -89,7 +89,7 @@ public class Configuration {
 
         private double rc;
 
-        private long t;
+        private int t;
 
         public Builder() {}
 
@@ -128,7 +128,7 @@ public class Configuration {
             return this;
         }
 
-        public Builder t(long t) {
+        public Builder t(int t) {
             this.t = t;
             return this;
         }

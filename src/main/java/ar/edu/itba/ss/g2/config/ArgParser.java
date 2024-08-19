@@ -178,9 +178,9 @@ public class ArgParser {
         }
 
         if (cmd.hasOption("t")) {
-            long t;
+            int t;
             try {
-                t = Long.parseLong(cmd.getOptionValue("t"));
+                t = Integer.parseInt(cmd.getOptionValue("t"));
             } catch (NumberFormatException e) {
                 System.err.println("Invalid time: " + cmd.getOptionValue("t"));
                 return null;
