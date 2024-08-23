@@ -1,40 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import numpy as np
-
-def parse_dynamic_file(file_path):
-    time_steps = []
-    positions = []
-    angles = []
-    with open(file_path, 'r') as file:
-        lines = file.readlines()
-
-    current_time = None
-    for line in lines:
-        line = line.strip()
-        if line.isdigit():
-            current_time = int(line)
-            time_steps.append(current_time)
-            positions.append([])
-            angles.append([])
-        else:
-            parts = line.split()
-            x, y, angle = float(parts[0]), float(parts[1]), float(parts[2])
-            positions[-1].append((x, y))
-            angles[-1].append(angle)
-
-    return time_steps, positions, angles
-
-def parse_static_file(file_path):
-    with open(file_path, 'r') as file:
-        lines = file.readlines()
-
-    L = int(lines[0].strip())
-    seed = int(lines[1].strip())
-    v = float(lines[2].strip())
-    noise = float(lines[3].strip())
-    rc = float(lines[4].strip())
-    return L, seed, v, noise, rc
+import utils
 
 previous_polarities = []
 def update(frame, scat, quiv, line, positions, angles, time_steps, vel, L, cmap):
@@ -123,6 +90,6 @@ def create_animation(time_steps, positions, angles, L, vel, noise, rc, output_fi
     ani.save(output_file, writer='ffmpeg')
 
 file_path = 'data/dynamic.txt'
-time_steps, positions, angles = parse_dynamic_file(file_path)
-L, _, v, noise, rc = parse_static_file('data/static.txt')
+time_steps, positions, angles = utils.parse_dynamic_file(file_path)
+L, _, v, noise, rc = utils.parse_static_file('data/static.txt')
 create_animation(time_steps, positions, angles, L, v, noise, rc)
