@@ -103,6 +103,10 @@ def create_animation(time_steps, positions, angles, L, vel, noise, rc, output_fi
 
     line, = ax2.plot([], [], 'b-', lw=1)
 
+    ax2.set_xlabel('Time Steps')
+    ax2.set_ylabel('Mean Angle (radians)')
+    ax2.set_title('Mean Angle Over Time')
+
     interval = 1000 / 15
 
     cmap = plt.cm.hsv  # Use HSV colormap
