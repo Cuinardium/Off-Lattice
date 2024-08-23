@@ -27,10 +27,10 @@ def plot_polarity(time_steps, angles, vel, output_file='data/polarity.png'):
 
     plt.savefig(output_file)
     
-def plot_multiple_polarities(time_steps, multiple_angles, vel, output_file='data/polarities.png'):
-    _, ax = plt.subplots()
+def plot_multiple_polarities(time_steps, multiple_angles, labels, vel, output_file='data/polarities.png'):
+    ax = plt.subplot()
 
-    for angles in multiple_angles:
+    for angles, label in zip(multiple_angles, labels):
         polarities = []
         for i in range(len(time_steps)):
             # vx: cos(angle), vy: sin(angle)
@@ -42,14 +42,22 @@ def plot_multiple_polarities(time_steps, multiple_angles, vel, output_file='data
             polarity = mag / (len(angles[i]) * vel)
             polarities.append(polarity)
 
-        ax.plot(time_steps, polarities)
+        ax.plot(time_steps, polarities, label=label)
 
     ax.set_xlim(0, time_steps[-1])
     ax.set_ylim(0, 1)
     ax.set_xlabel('Time step')
     ax.set_ylabel('Polarity')
 
+    # Shrink current axis by 20%
+    box = ax.get_position()
+    ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+
+    # Put a legend to the right of the current axis
+    ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+
     plt.savefig(output_file)
+
 
 
 
