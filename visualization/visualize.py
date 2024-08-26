@@ -43,7 +43,7 @@ def update(frame, scat, quiv, line, positions, angles, time_steps, vel, L, cmap)
 def create_animation(time_steps, positions, angles, L, vel, noise, rc, output_file='data/animation.mp4'):
     print(f'L: {L}, v: {vel}, noise: {noise}, rc: {rc}')
 
-    fig, (ax, ax2) = plt.subplots(2, 1, figsize=(10, 10))
+    fig, (ax, ax2) = plt.subplots(2, 1, figsize=(10, 20))
 
     x_min, x_max = 0, L
     y_min, y_max = 0, L
