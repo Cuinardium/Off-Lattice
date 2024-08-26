@@ -67,7 +67,7 @@ public class BoardState {
         }
     }
 
-    private void checkAdjacent(List<List<Set<Particle>>> board, int x, int y, Particle p1, Map<Particle, Set<Particle>> neighbours) {
+    private void checkAdjacent(int x, int y, Particle p1, Map<Particle, Set<Particle>> neighbours) {
         if(x < 0 || y < 0 || x >= board.size() || y >= board.get(0).size()) {
             return;
         }
@@ -95,18 +95,18 @@ public class BoardState {
                 Set<Particle> currentCellParticles = board.get(x).get(y);
                 for (Particle p1 : currentCellParticles) {
                     // reviso E
-                    checkAdjacent(board, x, y, p1, neighbours);
+                    checkAdjacent(x, y, p1, neighbours);
                     // me saco a mi mismo
                     neighbours.get(p1).remove(p1);
 
                     // reviso B
-                    checkAdjacent(board, x - 1, y, p1, neighbours);
+                    checkAdjacent(x - 1, y, p1, neighbours);
                     // reviso C
-                    checkAdjacent(board, x - 1, y+1, p1, neighbours);
+                    checkAdjacent(x - 1, y+1, p1, neighbours);
                     // reviso F
-                    checkAdjacent(board, x, y+1, p1, neighbours);
+                    checkAdjacent(x, y+1, p1, neighbours);
                     // reviso I
-                    checkAdjacent(board, x+1 , y+1, p1, neighbours);
+                    checkAdjacent(x+1 , y+1, p1, neighbours);
                 }
             }
         }
