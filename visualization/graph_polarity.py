@@ -28,7 +28,11 @@ def plot_polarity(time_steps, angles, vel, output_file='data/polarity.png'):
     plt.savefig(output_file)
     
 def plot_multiple_polarities(time_steps, multiple_angles, labels, vel, output_file='data/polarities.png'):
-    ax = plt.subplot()
+    fig, ax = plt.subplots()
+
+    # Ensure the number of labels matches the number of angle sets
+    if len(labels) != len(multiple_angles):
+        raise ValueError("Number of labels must match the number of angle sets")
 
     for angles, label in zip(multiple_angles, labels):
         polarities = []
@@ -57,6 +61,7 @@ def plot_multiple_polarities(time_steps, multiple_angles, labels, vel, output_fi
     ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 
     plt.savefig(output_file)
+    plt.close(fig)
 
 
 
