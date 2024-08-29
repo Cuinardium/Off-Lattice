@@ -73,21 +73,21 @@ def create_animation(time_steps, positions, angles, L, output_file='data/animati
 
     ani.save(output_file, writer='ffmpeg')
 
-def plot_initial_positions(positions, L, file_path='data/initial_positions.png'):
+def plot_positions(positions, L, t, file_path='data/initial_positions.png'):
     _, ax = plt.subplots(figsize=(10, 10))
     ax.set_xlim(0, L)
     ax.set_ylim(0, L)
-    ax.scatter([pos[0] for pos in positions[0]], [pos[1] for pos in positions[0]], s=10)
+    ax.scatter([pos[0] for pos in positions[t]], [pos[1] for pos in positions[t]], s=10)
     ax.set_xticks([])
     ax.set_yticks([])
 
     cmap = plt.cm.hsv
-    colors = cmap(np.array(angles[0]) / (2 * np.pi))  # Normalize angles to [0, 1] for colormap
+    colors = cmap(np.array(angles[t]) / (2 * np.pi))  # Normalize angles to [0, 1] for colormap
 
     ax.quiver(
-        [pos[0] for pos in positions[0]],
-        [pos[1] for pos in positions[0]],
-        np.cos(angles[0]) * (L / 30), np.sin(angles[0]) * (L / 30), angles='xy', scale_units='xy', scale=1,
+        [pos[0] for pos in positions[t]],
+        [pos[1] for pos in positions[t]],
+        np.cos(angles[t]) * (L / 30), np.sin(angles[t]) * (L / 30), angles='xy', scale_units='xy', scale=1,
         color=colors
     )
 
@@ -99,4 +99,5 @@ file_path = 'data/dynamic.txt'
 time_steps, positions, angles = utils.parse_dynamic_file(file_path)
 L, _, v, noise, rc = utils.parse_static_file('data/static.txt')
 create_animation(time_steps, positions, angles, L)
-plot_initial_positions(positions, L)
+plot_positions(positions, L, 10, 'data/positions_10.png')
+plot_positions(positions, L, 500, 'data/positions_500.png')
