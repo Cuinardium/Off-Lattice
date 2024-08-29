@@ -47,18 +47,20 @@ def create_animation(time_steps, positions, angles, L, output_file='data/animati
 
     init_pos = positions[0]
     init_angle = angles[0]
-    u = np.cos(init_angle)
-    v = np.sin(init_angle)
+    u = np.cos(init_angle) * (L / 30)
+    v = np.sin(init_angle) * (L / 30)
+
+    cmap = plt.cm.hsv  # Use HSV colormap
 
     quiv = ax.quiver(
         [pos[0] for pos in init_pos],
         [pos[1] for pos in init_pos],
         u, v, angles='xy', scale_units='xy', scale=1
     )
+    quiv.set_color(cmap(np.array(init_angle) / (2 * np.pi)))
 
     interval = 1000 / 15
 
-    cmap = plt.cm.hsv  # Use HSV colormap
 
     ani = animation.FuncAnimation(
         fig,
