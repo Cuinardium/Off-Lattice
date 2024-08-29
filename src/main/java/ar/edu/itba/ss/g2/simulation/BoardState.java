@@ -115,6 +115,10 @@ public class BoardState {
 
     public void updateBoardState() {
         Map<Particle, Set<Particle>> neighbours = getNeighbours();
+        for(Particle p: neighbours.keySet()) {
+            Set<Particle> particleNeighboursCopy = neighbours.get(p).stream().map(Particle::new).collect(Collectors.toSet());
+            neighbours.put(p, particleNeighboursCopy);
+        }
 
         for (Particle p : particles) {
 
