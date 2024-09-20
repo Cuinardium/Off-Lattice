@@ -1,6 +1,9 @@
 # Off Lattice
 This project is a Command Line Interface (CLI) tool that simulates an Off-Lattice model based on the paper [Novel Type of Phase Transition in a System of Self-Driven Particles.](https://labs.engineering.asu.edu/acs/wp-content/uploads/sites/33/2016/09/Novel-Type-of-Phase-Transition-in-a-System-of-Self-Driven-Particles-1995.pdf) The simulation involves particles moving within a square area, with their velocities influenced by their neighbors.
 
+![animation](https://github.com/user-attachments/assets/8ce1f207-5b9f-4e2a-b373-a9c287688c8b)
+
+
 ## Requirements
 - Java 18 or higher
 - Maven
